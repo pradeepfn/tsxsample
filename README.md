@@ -1,2 +1,3 @@
 # tsxsample
-example tsx enabled vacation code
+Run sample using;
+./build_and_run.sh
