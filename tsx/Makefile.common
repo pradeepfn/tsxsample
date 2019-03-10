@@ -6,7 +6,7 @@ CC       := gcc
 CPPFLAGS += -DNDEBUG
 CPPFLAGS += -I../lib -I../$(TMBUILD) -D_GNU_SOURCE
 CFLAGS   += -Wall -Wextra
-CFLAGS   += -O3 -mrtm
+CFLAGS   += -g -mrtm
 
 CFLAGS   += -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free
 

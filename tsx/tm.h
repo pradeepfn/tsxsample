@@ -5,18 +5,22 @@
 extern unsigned int ntsx;
 extern unsigned int ntm;
 extern unsigned int nfallback;
+extern unsigned int zero;
+extern unsigned int capacity;
+extern unsigned int conflict;
+extern unsigned int tdebug;
 
 
 #include <stdio.h>
 #include <sched.h>
 #include <pthread.h>
 
-#define CORE_FACTOR 4
+#define CORE_FACTOR 24
 
 static inline
 void bind_thread(long tid)
 {
-    int cpuid = (int)((tid) * CORE_FACTOR);
+    int cpuid = (int)(CORE_FACTOR);
     cpu_set_t mask;
     CPU_ZERO(&mask);
     CPU_SET(cpuid, &mask);
@@ -31,7 +35,7 @@ void bind_thread(long tid)
 static inline
 void bind_main_thread()
 {
-    int cpuid = (int)(0 * CORE_FACTOR);
+    int cpuid = (int)(CORE_FACTOR);
     cpu_set_t mask;
     CPU_ZERO(&mask);
     CPU_SET(cpuid, &mask);
@@ -48,8 +52,9 @@ void bind_main_thread()
 
 #define MAIN(argc, argv)              int main (int argc, char** argv)
 
-#define MAIN_RETURN(val)              printf("Total transactions : %d \n", ntm); \
-									  printf("tsx and fallbackpath counts : %d , %d \n", ntsx, nfallback); \
+#define MAIN_RETURN(val)              printf("Total transactions : %u \n", ntm); \
+									  printf("tsx and fallbackpath counts : %u , %u \n", ntsx, nfallback); \
+									  printf("zero : %u, conflict : %u, capacity : %u, debug : %u \n", zero, conflict, capacity, tdebug); \
 									  return val
 
 #define GOTO_SIM()                    /* nothing */

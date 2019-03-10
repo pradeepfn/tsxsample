@@ -80,6 +80,10 @@
 unsigned int ntm;
 unsigned int nfallback;
 unsigned int ntsx;
+unsigned int zero;
+unsigned int capacity;
+unsigned int conflict;
+unsigned int tdebug;
 
 /* =============================================================================
  * client_alloc

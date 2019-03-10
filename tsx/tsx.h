@@ -17,6 +17,11 @@ extern "C" {
 extern unsigned int ntsx;
 extern unsigned int nfallback;
 extern unsigned int ntm;
+extern unsigned int zero;
+extern unsigned int capacity;
+extern unsigned int conflict;
+extern unsigned int tdebug;
+
 
 static inline void tsxbegin(){
 	int n_tries;
@@ -27,8 +32,22 @@ static inline void tsxbegin(){
 			ntsx++;
 			ntm++;
             return;
-        }else if(!(status & _XABORT_RETRY)){
-            break;
+        }else{
+			if(status == 0){
+				zero++;
+			}
+			if(status == _XABORT_CAPACITY){
+				capacity++;
+			}
+			if(status == _XABORT_CONFLICT){
+				conflict++;
+			}
+			if(status == _XABORT_DEBUG){
+				tdebug++;
+			}
+		   	if(!(status & _XABORT_RETRY)){
+				break;
+			}
         }
     }   
     // fallback path
